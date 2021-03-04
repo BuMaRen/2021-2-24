@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <strings.h>
-#include "mashalib.h"
+#include "mashatypes.h"
 
 #define BUFFER_SIZE 512
 
