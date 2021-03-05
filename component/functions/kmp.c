@@ -6,7 +6,7 @@
 static Separator_t single_separator = SEPARATOR_NULL;
 
 // ready for kmp
-static int *getNextArray(char *separator)
+static int *getNextArray(const char *separator)
 {
     if (separator == NULL || *separator == '\0') return NULL;
     char *ptr = separator + 1;
@@ -47,3 +47,9 @@ static int *getNextArray(char *separator)
     return next;
 }
 
+unsigned int stringSeparate(const char *source_string, const char *separator)
+{
+    int *next = getNextArray(separator);
+    unsigned int source_index = 0, separator_index = 0, i = 0;
+    
+}
