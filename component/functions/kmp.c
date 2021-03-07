@@ -47,9 +47,27 @@ static int *getNextArray(const char *separator)
     return next;
 }
 
-unsigned int stringSeparate(const char *source_string, const char *separator)
+int stringSeparate(const char *source_string, const char *separator)
 {
     int *next = getNextArray(separator);
     unsigned int source_index = 0, separator_index = 0, i = 0;
-    
+    while (separator[separator_index] && source_string[i])
+    {
+        if (separator[separator_index] == source_string[i])
+        {
+            ++i;
+            ++separator_index;
+        }
+        else if (separator_index == 0)
+        {
+            ++source_index;
+            i = source_index;
+        }
+        else
+        {
+            source_index += separator_index - next[separator_index];
+            separator_index = (next[separator_index] == -1) ? 0 : next[separator_index];
+        }
+    }
+    return (separator[separator_index]) ? -1 : source_index;
 }
