@@ -1,11 +1,7 @@
 #include "functions.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 static Separator_t single_separator = SEPARATOR_NULL;
 
-// ready for kmp
 static int *getNextArray(const char *separator)
 {
     if (separator == NULL || *separator == '\0') return NULL;
@@ -70,4 +66,31 @@ int stringSeparate(const char *source_string, const char *separator)
         }
     }
     return (separator[separator_index]) ? -1 : source_index;
+}
+
+const char *cLoopCopy(char *dest, const char *source_string, const char separator, BufferSize_t size)
+{
+    unsigned int i = 0;
+    for (; i < size-1; ++i)
+    {
+        if (*source_string == '\0')
+        {
+            dest[i] = '\0';
+            return source_string;
+        }
+        if (separator == *source_string)
+        {
+            dest[i] = '\0';
+            return source_string + 1;
+        }
+        dest[i] = *source_string;
+        ++source_string;
+    }
+    if (separator == *source_string)
+    {
+        dest[i] = '\0';
+        return source_string + 1;
+    }
+    memset(dest, 0, size);
+    return NULL;
 }
